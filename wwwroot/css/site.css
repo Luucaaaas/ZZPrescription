@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'NewsGothicCondensed';
+	src: url('../font/NewsGothicCondensed.ttf');
+  }
+  html {
+  font-family: 'NewsGothicCondensed', sans-serif;
+  font-size: 14px;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
