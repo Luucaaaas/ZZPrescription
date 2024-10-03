@@ -6,6 +6,10 @@ namespace ZZPrescription.Data;
 public class ApplicationDbContext : DbContext
 {
 
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<Medecin> Medecins => Set<Medecin>();
     public DbSet<Allergie> Allergies => Set<Allergie>();
@@ -13,9 +17,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Medicament> Medicaments => Set<Medicament>();
     public DbSet<Antecedent> Antecedents => Set<Antecedent>();
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

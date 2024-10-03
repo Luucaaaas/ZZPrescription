@@ -1,0 +1,25 @@
+﻿@* @model ZZPrescription.Models.Patient
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Nom_p"></label>
+        <input asp-for="Nom_p" class="form-control" />
+        <span asp-validation-for="Nom_p" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prenom_p"></label>
+        <input asp-for="Prenom_p" class="form-control" />
+        <span asp-validation-for="Prenom_p" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Sexe_p"></label>
+        <input asp-for="Sexe_p" class="form-control" />
+        <span asp-validation-for="Sexe_p" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Num_secu"></label>
+        <input asp-for="Num_secu" class="form-control" />
+        <span asp-validation-for="Num_secu" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Ajouter</button>
+</form> *@

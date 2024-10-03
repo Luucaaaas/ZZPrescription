@@ -6,11 +6,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient</title>
 </head>
 <body>
-    <h1>Patient</h1>
-    <p>Welcome to the Patient page.</p>
-    <p>Use this page to manage patients.</p>
+@model IEnumerable<ZZPrescription.Models.Patient>
+
+<h1>Liste des Patients</h1>
+<div class="container-patient">
+    @foreach (var patient in Model)
+    {
+        <div class="card">
+            <h3>ID : @patient.PatientId</h3>
+            <p><strong>Nom :</strong> @patient.Nom_p</p>
+            <p><strong>Prénom :</strong> @patient.Prenom_p</p>
+            <p><strong>Sexe :</strong> @patient.Sexe_p</p>
+            <p><strong>Numéro de Sécurité Sociale :</strong> @patient.Num_secu</p>
+        </div>
+    }
+</div>
+
+  <button id="openModal" class="btn btn-primary">Ajouter un Patient</button>
+
+<div id="addPatientModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>Ajouter un Patient</h2>
+        <form id="addPatientForm" asp-action="Add" method="post">
+            <div class="form-group">
+                <label for="Nom_p">Nom</label>
+                <input type="text" name="Nom_p" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="Prenom_p">Prénom</label>
+                <input type="text" name="Prenom_p" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="Sexe_p">Sexe</label>
+                <select name="Sexe_p" class="form-control" required>
+                    <option value="">Sélectionnez le sexe</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Num_secu">Numéro de Sécurité Sociale</label>
+                <input type="text" name="Num_secu" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-success">Ajouter</button>
+        </form>
+    </div>
+</div>
+
+    <script src="~/js/site.js"></script>
+
+
+
+
+<a href="@Url.Action("Add", "Patient")" class="btn btn-primary">Ajouter un Patient</a>
 </body>
 </html>
