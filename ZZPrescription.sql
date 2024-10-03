@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 30 sep. 2024 à 16:24
+-- Généré le : jeu. 03 oct. 2024 à 12:28
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -24,365 +24,348 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `allergie`
+-- Structure de la table `allergiemedicament`
 --
 
-CREATE TABLE `allergie` (
-  `id_al` int(11) NOT NULL,
-  `libelle_al` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `allergie`
---
-
-INSERT INTO `allergie` (`id_al`, `libelle_al`) VALUES
-(1, 'Allergie à l\'aspirine'),
-(2, 'Allergie au paracétamol'),
-(3, 'Réaction allergique aux pénicillines');
+CREATE TABLE `allergiemedicament` (
+  `AllergiesAllergieId` int(11) NOT NULL,
+  `MedicamentsMedicamentId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `antecedent`
+-- Structure de la table `allergiepatient`
 --
 
-CREATE TABLE `antecedent` (
-  `id_a` int(11) NOT NULL,
-  `libelle_a` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `antecedent`
---
-
-INSERT INTO `antecedent` (`id_a`, `libelle_a`) VALUES
-(1, 'Ulcères gastriques actifs'),
-(2, 'Tendinite'),
-(3, 'Insuffisance rénale'),
-(4, 'Grossesse'),
-(5, 'Hyperkaliémie'),
-(6, 'Hypotension sévère'),
-(7, 'Syndrome sérotoninergique'),
-(8, 'Maladie du foie active'),
-(9, 'Dépendance aux substances'),
-(10, 'Infections fongiques systémiques'),
-(11, 'Angioedème'),
-(12, 'Tachycardie'),
-(13, 'Dépendance'),
-(14, 'Porphyrie aiguë'),
-(15, 'Saignement actif');
+CREATE TABLE `allergiepatient` (
+  `AllergiesAllergieId` int(11) NOT NULL,
+  `PatientsPatientId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `a_eu`
+-- Structure de la table `allergies`
 --
 
-CREATE TABLE `a_eu` (
-  `id_a` int(11) NOT NULL,
-  `id_p` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `a_eu`
---
-
-INSERT INTO `a_eu` (`id_a`, `id_p`) VALUES
-(1, 1);
+CREATE TABLE `allergies` (
+  `AllergieId` int(11) NOT NULL,
+  `Libelle_al` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `est`
+-- Structure de la table `antecedentmedicament`
 --
 
-CREATE TABLE `est` (
-  `id_al` int(11) NOT NULL,
-  `id_p` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `est`
---
-
-INSERT INTO `est` (`id_al`, `id_p`) VALUES
-(1, 1);
+CREATE TABLE `antecedentmedicament` (
+  `AntecedentsAntecedentId` int(11) NOT NULL,
+  `MedicamentsMedicamentId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `incompatible`
+-- Structure de la table `antecedentpatient`
 --
 
-CREATE TABLE `incompatible` (
-  `id` int(11) NOT NULL,
-  `id_a` int(11) DEFAULT NULL,
-  `id_med` int(11) NOT NULL,
-  `id_al` int(11) DEFAULT NULL,
-  `id_med_Medicament` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `incompatible`
---
-
-INSERT INTO `incompatible` (`id`, `id_a`, `id_med`, `id_al`, `id_med_Medicament`) VALUES
-(1, NULL, 3, 1, 17),
-(2, 1, 4, NULL, NULL);
+CREATE TABLE `antecedentpatient` (
+  `AntecedentsAntecedentId` int(11) NOT NULL,
+  `PatientsPatientId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `medecin`
+-- Structure de la table `antecedents`
 --
 
-CREATE TABLE `medecin` (
-  `id_m` int(11) NOT NULL,
-  `nom_m` varchar(50) NOT NULL,
-  `prenom_m` varchar(50) NOT NULL,
-  `date_naissance_m` date NOT NULL,
-  `login_m` varchar(255) NOT NULL,
-  `password_m` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `medecin`
---
-
-INSERT INTO `medecin` (`id_m`, `nom_m`, `prenom_m`, `date_naissance_m`, `login_m`, `password_m`) VALUES
-(12, 'Zidane', 'lemedecin', '1972-06-23', 'zizou', '$2a$11$FCpp6QGmiQsX0hmNQbM2eOgu/y9udCTiM4vOOQ8mZgmb2Af2YrNIu'),
-(24, 'a', 'a', '2007-04-01', 'a', '$2a$11$.5wiJN7knLrpo.Eh9zgLXON3fwm/CUfhT4o1V.QL4sq1KYHpxEASa');
+CREATE TABLE `antecedents` (
+  `AntecedentId` int(11) NOT NULL,
+  `Libelle_a` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `medicament`
+-- Structure de la table `medecins`
 --
 
-CREATE TABLE `medicament` (
-  `id_med` int(11) NOT NULL,
-  `libelle_med` varchar(50) NOT NULL,
-  `contre_indication` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `medicament`
---
-
-INSERT INTO `medicament` (`id_med`, `libelle_med`, `contre_indication`) VALUES
-(1, 'Aspirine', 'Allergie à l\'aspirine'),
-(2, 'Paracétamol', 'Allergie au paracétamol'),
-(3, 'Ibuprofène', 'Ulcères gastriques actifs'),
-(4, 'Amoxicilline', 'Réaction allergique aux pénicillines'),
-(5, 'Ciprofloxacine', 'Tendinite'),
-(6, 'Metformine', 'Insuffisance rénale'),
-(7, 'Omeprazole', 'Grossesse'),
-(8, 'Losartan', 'Hyperkaliémie'),
-(9, 'Simvastatine', 'Maladie du foie active'),
-(10, 'Amlodipine', 'Hypotension sévère'),
-(11, 'Atorvastatine', 'Maladie du foie active'),
-(12, 'Sertraline', 'Syndrome sérotoninergique'),
-(13, 'Fluoxetine', 'Syndrome sérotoninergique'),
-(14, 'Diazepam', 'Dépendance aux substances'),
-(15, 'Prednisone', 'Infections fongiques systémiques'),
-(16, 'Lisinopril', 'Angioedème'),
-(17, 'Albuterol', 'Tachycardie'),
-(18, 'Gabapentine', 'Dépendance'),
-(19, 'Ranitidine', 'Porphyrie aiguë'),
-(20, 'Warfarine', 'Saignement actif');
+CREATE TABLE `medecins` (
+  `MedecinId` int(11) NOT NULL,
+  `Nom_m` longtext NOT NULL,
+  `Prenom_m` longtext NOT NULL,
+  `Date_naissance_m` datetime(6) NOT NULL,
+  `Login_m` longtext NOT NULL,
+  `Password_m` longtext NOT NULL,
+  `Role` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ordonnance`
+-- Structure de la table `medicamentordonnance`
 --
 
-CREATE TABLE `ordonnance` (
-  `id_o` int(11) NOT NULL,
-  `posologie` varchar(50) NOT NULL,
-  `duree_traitement` varchar(50) NOT NULL,
-  `instruction_specifique` varchar(50) NOT NULL,
-  `id_m` int(11) NOT NULL,
-  `id_p` int(11) NOT NULL,
-  `id_med` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Déchargement des données de la table `ordonnance`
---
-
-INSERT INTO `ordonnance` (`id_o`, `posologie`, `duree_traitement`, `instruction_specifique`, `id_m`, `id_p`, `id_med`) VALUES
-(1, '3 par jour', '8 mois ', 'le soir', 12, 1, 1);
+CREATE TABLE `medicamentordonnance` (
+  `MedicamentsMedicamentId` int(11) NOT NULL,
+  `OrdonnancesOrdonnanceId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `patient`
+-- Structure de la table `medicaments`
 --
 
-CREATE TABLE `patient` (
-  `id_p` int(11) NOT NULL,
-  `nom_p` varchar(50) DEFAULT NULL,
-  `prenom_p` varchar(50) NOT NULL,
-  `sexe` char(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+CREATE TABLE `medicaments` (
+  `MedicamentId` int(11) NOT NULL,
+  `Libelle_med` longtext NOT NULL,
+  `Contr_indication` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `patient`
+-- Structure de la table `ordonnances`
 --
 
-INSERT INTO `patient` (`id_p`, `nom_p`, `prenom_p`, `sexe`) VALUES
-(1, 'Dupont', 'Jean', 'Homme'),
-(4, 'Zizou', 'lamaladie', 'Homme');
+CREATE TABLE `ordonnances` (
+  `OrdonnanceId` int(11) NOT NULL,
+  `Posologie` longtext NOT NULL,
+  `Duree_traitement` longtext NOT NULL,
+  `Instructions_specifique` longtext NOT NULL,
+  `MedecinId` int(11) NOT NULL,
+  `PatientId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `patients`
+--
+
+CREATE TABLE `patients` (
+  `PatientId` int(11) NOT NULL,
+  `Nom_p` longtext NOT NULL,
+  `Prenom_p` longtext NOT NULL,
+  `Sexe_p` longtext NOT NULL,
+  `Num_secu` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `patients`
+--
+
+INSERT INTO `patients` (`PatientId`, `Nom_p`, `Prenom_p`, `Sexe_p`, `Num_secu`) VALUES
+(1, '[value-2]', '[value-3]', '[value-4]', '[value-5]'),
+(2, 'd', 'd', 'd', 'd'),
+(3, 'dz', 'd', 's', 'z'),
+(4, 'dz', 'd', '121', '22'),
+(5, '4', '44', '4', 'ee'),
+(6, 'a', 'a', 'a', 'a'),
+(7, 'f', 'f', 'f', 'f'),
+(8, 'Zidane', 'Le malade', 'Homme', '014091480198'),
+(9, 'F', 'f', 'F', 'F'),
+(10, 'f', 'f', 'f', 'f'),
+(11, 'C', 'C', 'C', 'C'),
+(12, 'D', 'D', 'D', 'D'),
+(13, 'f', 'f', 'Homme', '111111111111111'),
+(14, 'S', 'S', 'Homme', '111111111111111'),
+(15, 'd', 'd', 'Homme', '111111111111111'),
+(16, 'd', 'd', 'Homme', '111111111111111'),
+(17, 'd', 'd', 'Femme', '111111111111111'),
+(18, 'dd', 'e', 'Homme', '111111111111111'),
+(19, 'aa', 'a', 'Homme', '111111111111111');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `__efmigrationshistory`
+--
+
+CREATE TABLE `__efmigrationshistory` (
+  `MigrationId` varchar(150) NOT NULL,
+  `ProductVersion` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `__efmigrationshistory`
+--
+
+INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
+('20241001121352_InitialCreate', '8.0.1');
 
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `allergie`
+-- Index pour la table `allergiemedicament`
 --
-ALTER TABLE `allergie`
-  ADD PRIMARY KEY (`id_al`);
+ALTER TABLE `allergiemedicament`
+  ADD PRIMARY KEY (`AllergiesAllergieId`,`MedicamentsMedicamentId`),
+  ADD KEY `IX_AllergieMedicament_MedicamentsMedicamentId` (`MedicamentsMedicamentId`);
 
 --
--- Index pour la table `antecedent`
+-- Index pour la table `allergiepatient`
 --
-ALTER TABLE `antecedent`
-  ADD PRIMARY KEY (`id_a`);
+ALTER TABLE `allergiepatient`
+  ADD PRIMARY KEY (`AllergiesAllergieId`,`PatientsPatientId`),
+  ADD KEY `IX_AllergiePatient_PatientsPatientId` (`PatientsPatientId`);
 
 --
--- Index pour la table `a_eu`
+-- Index pour la table `allergies`
 --
-ALTER TABLE `a_eu`
-  ADD PRIMARY KEY (`id_a`,`id_p`),
-  ADD KEY `a_eu_Patient0_FK` (`id_p`);
+ALTER TABLE `allergies`
+  ADD PRIMARY KEY (`AllergieId`);
 
 --
--- Index pour la table `est`
+-- Index pour la table `antecedentmedicament`
 --
-ALTER TABLE `est`
-  ADD PRIMARY KEY (`id_al`,`id_p`),
-  ADD KEY `est_Patient0_FK` (`id_p`);
+ALTER TABLE `antecedentmedicament`
+  ADD PRIMARY KEY (`AntecedentsAntecedentId`,`MedicamentsMedicamentId`),
+  ADD KEY `IX_AntecedentMedicament_MedicamentsMedicamentId` (`MedicamentsMedicamentId`);
 
 --
--- Index pour la table `incompatible`
+-- Index pour la table `antecedentpatient`
 --
-ALTER TABLE `incompatible`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `incompatible_Antecedent_FK` (`id_a`),
-  ADD KEY `incompatible_Medicament0_FK` (`id_med`),
-  ADD KEY `incompatible_Allergie1_FK` (`id_al`),
-  ADD KEY `incompatible_Medicament2_FK` (`id_med_Medicament`);
+ALTER TABLE `antecedentpatient`
+  ADD PRIMARY KEY (`AntecedentsAntecedentId`,`PatientsPatientId`),
+  ADD KEY `IX_AntecedentPatient_PatientsPatientId` (`PatientsPatientId`);
 
 --
--- Index pour la table `medecin`
+-- Index pour la table `antecedents`
 --
-ALTER TABLE `medecin`
-  ADD PRIMARY KEY (`id_m`);
+ALTER TABLE `antecedents`
+  ADD PRIMARY KEY (`AntecedentId`);
 
 --
--- Index pour la table `medicament`
+-- Index pour la table `medecins`
 --
-ALTER TABLE `medicament`
-  ADD PRIMARY KEY (`id_med`);
+ALTER TABLE `medecins`
+  ADD PRIMARY KEY (`MedecinId`);
 
 --
--- Index pour la table `ordonnance`
+-- Index pour la table `medicamentordonnance`
 --
-ALTER TABLE `ordonnance`
-  ADD PRIMARY KEY (`id_o`),
-  ADD KEY `ordonnance_Medecin_FK` (`id_m`),
-  ADD KEY `ordonnance_Patient0_FK` (`id_p`),
-  ADD KEY `ordonnance_Medicament1_FK` (`id_med`);
+ALTER TABLE `medicamentordonnance`
+  ADD PRIMARY KEY (`MedicamentsMedicamentId`,`OrdonnancesOrdonnanceId`),
+  ADD KEY `IX_MedicamentOrdonnance_OrdonnancesOrdonnanceId` (`OrdonnancesOrdonnanceId`);
 
 --
--- Index pour la table `patient`
+-- Index pour la table `medicaments`
 --
-ALTER TABLE `patient`
-  ADD PRIMARY KEY (`id_p`);
+ALTER TABLE `medicaments`
+  ADD PRIMARY KEY (`MedicamentId`);
+
+--
+-- Index pour la table `ordonnances`
+--
+ALTER TABLE `ordonnances`
+  ADD PRIMARY KEY (`OrdonnanceId`),
+  ADD UNIQUE KEY `IX_Ordonnances_PatientId` (`PatientId`),
+  ADD KEY `IX_Ordonnances_MedecinId` (`MedecinId`);
+
+--
+-- Index pour la table `patients`
+--
+ALTER TABLE `patients`
+  ADD PRIMARY KEY (`PatientId`);
+
+--
+-- Index pour la table `__efmigrationshistory`
+--
+ALTER TABLE `__efmigrationshistory`
+  ADD PRIMARY KEY (`MigrationId`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT pour la table `allergie`
+-- AUTO_INCREMENT pour la table `allergies`
 --
-ALTER TABLE `allergie`
-  MODIFY `id_al` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `allergies`
+  MODIFY `AllergieId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `antecedent`
+-- AUTO_INCREMENT pour la table `antecedents`
 --
-ALTER TABLE `antecedent`
-  MODIFY `id_a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `antecedents`
+  MODIFY `AntecedentId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `incompatible`
+-- AUTO_INCREMENT pour la table `medecins`
 --
-ALTER TABLE `incompatible`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `medecins`
+  MODIFY `MedecinId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `medecin`
+-- AUTO_INCREMENT pour la table `medicaments`
 --
-ALTER TABLE `medecin`
-  MODIFY `id_m` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+ALTER TABLE `medicaments`
+  MODIFY `MedicamentId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `medicament`
+-- AUTO_INCREMENT pour la table `ordonnances`
 --
-ALTER TABLE `medicament`
-  MODIFY `id_med` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `ordonnances`
+  MODIFY `OrdonnanceId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `ordonnance`
+-- AUTO_INCREMENT pour la table `patients`
 --
-ALTER TABLE `ordonnance`
-  MODIFY `id_o` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT pour la table `patient`
---
-ALTER TABLE `patient`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `patients`
+  MODIFY `PatientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `a_eu`
+-- Contraintes pour la table `allergiemedicament`
 --
-ALTER TABLE `a_eu`
-  ADD CONSTRAINT `a_eu_Antecedent_FK` FOREIGN KEY (`id_a`) REFERENCES `antecedent` (`id_a`),
-  ADD CONSTRAINT `a_eu_Patient0_FK` FOREIGN KEY (`id_p`) REFERENCES `patient` (`id_p`);
+ALTER TABLE `allergiemedicament`
+  ADD CONSTRAINT `FK_AllergieMedicament_Allergies_AllergiesAllergieId` FOREIGN KEY (`AllergiesAllergieId`) REFERENCES `allergies` (`AllergieId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_AllergieMedicament_Medicaments_MedicamentsMedicamentId` FOREIGN KEY (`MedicamentsMedicamentId`) REFERENCES `medicaments` (`MedicamentId`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `est`
+-- Contraintes pour la table `allergiepatient`
 --
-ALTER TABLE `est`
-  ADD CONSTRAINT `est_Allergie_FK` FOREIGN KEY (`id_al`) REFERENCES `allergie` (`id_al`),
-  ADD CONSTRAINT `est_Patient0_FK` FOREIGN KEY (`id_p`) REFERENCES `patient` (`id_p`);
+ALTER TABLE `allergiepatient`
+  ADD CONSTRAINT `FK_AllergiePatient_Allergies_AllergiesAllergieId` FOREIGN KEY (`AllergiesAllergieId`) REFERENCES `allergies` (`AllergieId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_AllergiePatient_Patients_PatientsPatientId` FOREIGN KEY (`PatientsPatientId`) REFERENCES `patients` (`PatientId`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `incompatible`
+-- Contraintes pour la table `antecedentmedicament`
 --
-ALTER TABLE `incompatible`
-  ADD CONSTRAINT `incompatible_Allergie1_FK` FOREIGN KEY (`id_al`) REFERENCES `allergie` (`id_al`),
-  ADD CONSTRAINT `incompatible_Antecedent_FK` FOREIGN KEY (`id_a`) REFERENCES `antecedent` (`id_a`),
-  ADD CONSTRAINT `incompatible_Medicament0_FK` FOREIGN KEY (`id_med`) REFERENCES `medicament` (`id_med`),
-  ADD CONSTRAINT `incompatible_Medicament2_FK` FOREIGN KEY (`id_med_Medicament`) REFERENCES `medicament` (`id_med`);
+ALTER TABLE `antecedentmedicament`
+  ADD CONSTRAINT `FK_AntecedentMedicament_Antecedents_AntecedentsAntecedentId` FOREIGN KEY (`AntecedentsAntecedentId`) REFERENCES `antecedents` (`AntecedentId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_AntecedentMedicament_Medicaments_MedicamentsMedicamentId` FOREIGN KEY (`MedicamentsMedicamentId`) REFERENCES `medicaments` (`MedicamentId`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `ordonnance`
+-- Contraintes pour la table `antecedentpatient`
 --
-ALTER TABLE `ordonnance`
-  ADD CONSTRAINT `ordonnance_Medecin_FK` FOREIGN KEY (`id_m`) REFERENCES `medecin` (`id_m`),
-  ADD CONSTRAINT `ordonnance_Medicament1_FK` FOREIGN KEY (`id_med`) REFERENCES `medicament` (`id_med`),
-  ADD CONSTRAINT `ordonnance_Patient0_FK` FOREIGN KEY (`id_p`) REFERENCES `patient` (`id_p`);
+ALTER TABLE `antecedentpatient`
+  ADD CONSTRAINT `FK_AntecedentPatient_Antecedents_AntecedentsAntecedentId` FOREIGN KEY (`AntecedentsAntecedentId`) REFERENCES `antecedents` (`AntecedentId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_AntecedentPatient_Patients_PatientsPatientId` FOREIGN KEY (`PatientsPatientId`) REFERENCES `patients` (`PatientId`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `medicamentordonnance`
+--
+ALTER TABLE `medicamentordonnance`
+  ADD CONSTRAINT `FK_MedicamentOrdonnance_Medicaments_MedicamentsMedicamentId` FOREIGN KEY (`MedicamentsMedicamentId`) REFERENCES `medicaments` (`MedicamentId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_MedicamentOrdonnance_Ordonnances_OrdonnancesOrdonnanceId` FOREIGN KEY (`OrdonnancesOrdonnanceId`) REFERENCES `ordonnances` (`OrdonnanceId`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `ordonnances`
+--
+ALTER TABLE `ordonnances`
+  ADD CONSTRAINT `FK_Ordonnances_Medecins_MedecinId` FOREIGN KEY (`MedecinId`) REFERENCES `medecins` (`MedecinId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_Ordonnances_Patients_PatientId` FOREIGN KEY (`PatientId`) REFERENCES `patients` (`PatientId`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

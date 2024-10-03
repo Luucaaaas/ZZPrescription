@@ -34,4 +34,3 @@ window.onclick = function(event) {
         }, 500);
     }
 }
-//fin modal pour ajouter un nouveau patient

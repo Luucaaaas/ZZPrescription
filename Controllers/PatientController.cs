@@ -23,8 +23,6 @@ namespace ZZPrescription.Controllers
             return View(patients); // retourne la vue Index.cshtml avec la liste des patients
         }
 
-        // GET 
-
 
         // POST
         [HttpPost]

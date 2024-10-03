@@ -17,7 +17,6 @@ public class Patient
     [Required(ErrorMessage = "Le sexe est requis.")]
     public required string Sexe_p { get; set; }
     [Required(ErrorMessage = "Le numéro de sécurité sociale est requis.")]
-    [RegularExpression(@"^\d{15}$", ErrorMessage = "Le numéro de sécurité sociale doit contenir exactement 15 chiffres.")]
     public required string Num_secu { get; set; }
 
     public List<Antecedent> Antecedents { get; set; } = new();

@@ -49,18 +49,16 @@
             </div>
             <div class="form-group">
                 <label for="Num_secu">Numéro de Sécurité Sociale</label>
-                <input type="text" name="Num_secu" class="form-control" required />
+                <input type="text" id="Num_secu" name="Num_secu" class="form-control" required pattern="^\d{15}$" title="Votre numéro de sécurité sociale doit contenir 15 chiffres." oninput="validateInput(this)" />
             </div>
+            <script src="~/js/patient/numSecu.js"></script>
             <button type="submit" class="btn btn-success">Ajouter</button>
         </form>
     </div>
 </div>
 
-    <script src="~/js/site.js"></script>
+<script src="~/js/patient/modalPatient.js"></script>
 
 
-
-
-<a href="@Url.Action("Add", "Patient")" class="btn btn-primary">Ajouter un Patient</a>
 </body>
 </html>
