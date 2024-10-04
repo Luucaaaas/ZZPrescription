@@ -1,9 +1,11 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZZPrescription.Models;
 
 namespace ZZPrescription.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     public IActionResult Index()

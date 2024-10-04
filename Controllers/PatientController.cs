@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using ZZPrescription.Models; // Ajoutez l'espace de noms pour vos modèles
-using ZZPrescription.Data;   // Ajoutez l'espace de noms pour votre contexte de base de données
+using ZZPrescription.Data;
+using Microsoft.AspNetCore.Authorization;   // Ajoutez l'espace de noms pour votre contexte de base de données
 
 namespace ZZPrescription.Controllers
 {
+    [Authorize]
     public class PatientController : Controller
     {
         private readonly ApplicationDbContext _context;

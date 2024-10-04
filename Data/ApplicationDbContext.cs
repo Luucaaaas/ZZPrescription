@@ -1,9 +1,10 @@
 using ZZPrescription.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ZZPrescription.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<Medecin>
 {
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -11,7 +12,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Patient> Patients => Set<Patient>();
-    public DbSet<Medecin> Medecins => Set<Medecin>();
     public DbSet<Allergie> Allergies => Set<Allergie>();
     public DbSet<Ordonnance> Ordonnances => Set<Ordonnance>();
     public DbSet<Medicament> Medicaments => Set<Medicament>();
