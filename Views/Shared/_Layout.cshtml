@@ -48,6 +48,13 @@
         <div class="image-logo">
             <img src="~/pics/logogsb.png" alt="Logo">
         </div>
+
+        @if (User.Identity.IsAuthenticated) {
+        <span class="navbar-text">Hello, @User.Identity.Name!</span>
+        <a asp-action="Logout" asp-controller="Account">Logout</a>
+        } else {
+        <a asasp-action="Login" asp-controller="Account">Login</a>
+        }
     </header>
     @RenderBody()
     <footer class="border-top footer text-muted">

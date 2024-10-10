@@ -21,19 +21,19 @@ namespace ZZPrescription.Controllers
         return View(); // Affiche la vue Login
     }
 
-    [HttpPost]
+   [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (ModelState.IsValid)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
-
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+            
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError(string.Empty, "Tentative de connexion invalide.");
         }
 
         return View(model);
@@ -47,10 +47,10 @@ namespace ZZPrescription.Controllers
     }
 
     
-public IActionResult Register()
-{
-    return View();
-}
+    public IActionResult Register()
+    {
+        return View();
+    }
 
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)

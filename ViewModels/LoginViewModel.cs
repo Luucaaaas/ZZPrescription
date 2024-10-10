@@ -6,10 +6,10 @@ namespace ZZPrescription.Models;
 
 public class LoginViewModel
 {
-    [Required(ErrorMessage = "The Username field is required.")]
+    [Required(ErrorMessage = "Nom d'utilisateur requis.")]
     public required string UserName { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Mot de passe requis.")]
     [DataType(DataType.Password)]
     public required string Password { get; set; }
 
